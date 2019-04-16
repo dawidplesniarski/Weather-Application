@@ -8,13 +8,118 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="431dp"
+        android:layout_width="371dp"
+        android:layout_height="0dp"
         android:layout_marginStart="21dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="21dp"
-        android:text="TextView"
+        android:layout_marginBottom="53dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <TextView
+        android:id="@+id/tempTextView"
+        android:layout_width="116dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/pressureTextView"
+        android:layout_width="116dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="140dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/humidityTextView"
+        android:layout_width="116dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="212dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/tempMinTextView"
+        android:layout_width="116dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="300dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/tempMaxTextView"
+        android:layout_width="116dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="208dp"
+        android:layout_marginTop="300dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/humidityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="410dp"
+        android:text="Humidity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/humidityTextView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="23dp"
+        android:text="Temp Min"
+        app:layout_constraintBottom_toTopOf="@+id/tempMinTextView"
+        app:layout_constraintEnd_toEndOf="@+id/tempMinTextView"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginBottom="42dp"
+        android:text="Temp Max"
+        app:layout_constraintBottom_toBottomOf="@+id/tempMaxTextView"
+        app:layout_constraintStart_toStartOf="@+id/tempMaxTextView"
+        app:layout_constraintTop_toBottomOf="@+id/humidityTextView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="482dp"
+        android:text="Pressure"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/pressureTextView"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:layout_marginBottom="48dp"
+        android:text="Temp"
+        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        app:layout_constraintStart_toStartOf="@+id/tempTextView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
 </android.support.constraint.ConstraintLayout>

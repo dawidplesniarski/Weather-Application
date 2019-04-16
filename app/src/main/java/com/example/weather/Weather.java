@@ -19,11 +19,21 @@ public class Weather extends AppCompatActivity {
 
     ProgressDialog pd;
     TextView textView;
+    TextView tempView;
+    TextView pressureView;
+    TextView tempMinView;
+    TextView tempMaxView;
+    TextView humidityView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         textView=(TextView)findViewById(R.id.textView);
+        tempView=(TextView)findViewById(R.id.tempTextView);
+        tempMinView=(TextView)findViewById(R.id.tempMinTextView);
+        tempMaxView=(TextView)findViewById(R.id.tempMaxTextView);
+        humidityView=(TextView)findViewById(R.id.humidityTextView);
+        pressureView=(TextView)findViewById(R.id.pressureTextView);
 
         new JsonTask().execute("http://api.openweathermap.org/data/2.5/weather?q=Tarnow,pl&APPID=749561a315b14523a8f5f1ef95e45864&units=metric");
     }
@@ -95,7 +105,24 @@ public class Weather extends AppCompatActivity {
                 pd.dismiss();
             }
             //TextView textView = findViewById(R.id.textView);
-            textView.setText(result);
+            //textView.setText(result);
+            wUpdate(result);
+        }
+
+        void wUpdate(String result)
+        {
+            String temperature = result.substring(result.indexOf("temp\":")+10,result.indexOf("pressure\":")-2);
+            String tempMin = result.substring(result.indexOf("temp_min\":")+10,result.indexOf("temp_max\":")-2);
+            String tempMax = result.substring(result.indexOf("temp_max\":")+10,result.indexOf("wind\":")-3);
+            String cityName = result.substring(result.indexOf("name\":")+10,result.indexOf("cod\":")-3);
+            String pressure = result.substring(result.indexOf("pressure\":")+10,result.indexOf("humidity\":")-2);
+            String humidity = result.substring(result.indexOf("humidity\":")+10,result.indexOf("temp_min\":")-2);
+            tempView.setText(temperature);
+            humidityView.setText(humidity);
+            tempMaxView.setText(tempMax);
+            tempMinView.setText(tempMin);
+            pressureView.setText(pressure);
+
         }
     }
 
