@@ -1,6 +1,7 @@
 package com.example.weather;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,18 +25,24 @@ public class Weather extends AppCompatActivity {
     TextView tempMinView;
     TextView tempMaxView;
     TextView humidityView;
+    private String mCityName = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
-        textView=(TextView)findViewById(R.id.textView);
-        tempView=(TextView)findViewById(R.id.tempTextView);
-        tempMinView=(TextView)findViewById(R.id.tempMinTextView);
-        tempMaxView=(TextView)findViewById(R.id.tempMaxTextView);
-        humidityView=(TextView)findViewById(R.id.humidityTextView);
-        pressureView=(TextView)findViewById(R.id.pressureTextView);
-
-        new JsonTask().execute("http://api.openweathermap.org/data/2.5/weather?q=Tarnow,pl&APPID=749561a315b14523a8f5f1ef95e45864&units=metric");
+        textView=findViewById(R.id.cityNameTextView);
+        tempView=findViewById(R.id.tempTextView);
+        tempMinView=findViewById(R.id.tempMinTextView);
+        tempMaxView=findViewById(R.id.tempMaxTextView);
+        humidityView=findViewById(R.id.humidityTextView);
+        pressureView=findViewById(R.id.pressureTextView);
+        Intent intent = getIntent();
+        mCityName = intent.getStringExtra("cityName");
+        String WeatherAdress="http://api.openweathermap.org/data/2.5/weather?q="+mCityName+",pl&APPID=749561a315b14523a8f5f1ef95e45864&units=metric";
+        TextView cityNameTextView = findViewById(R.id.cityNameTextView);
+        cityNameTextView.setText(String.valueOf(mCityName));
+        new JsonTask().execute(WeatherAdress);
+        mCityName ="";
     }
 
 
@@ -69,7 +76,7 @@ public class Weather extends AppCompatActivity {
                 reader = new BufferedReader(new InputStreamReader(stream));
 
                 StringBuffer buffer = new StringBuffer();
-                String line = "";
+                String line;
 
                 while ((line = reader.readLine()) != null) {
                     buffer.append(line+"\n");
@@ -113,8 +120,8 @@ public class Weather extends AppCompatActivity {
         {
             String temperature = result.substring(result.indexOf("temp\":")+10,result.indexOf("pressure\":")-2);
             String tempMin = result.substring(result.indexOf("temp_min\":")+10,result.indexOf("temp_max\":")-2);
-            String tempMax = result.substring(result.indexOf("temp_max\":")+10,result.indexOf("wind\":")-3);
-            String cityName = result.substring(result.indexOf("name\":")+10,result.indexOf("cod\":")-3);
+            String tempMax = result.substring(result.indexOf("temp_max\":")+10,result.indexOf("visibility\":")-3);
+            //String cityName = result.substring(result.indexOf("name\":")+10,result.indexOf("cod\":")-3);
             String pressure = result.substring(result.indexOf("pressure\":")+10,result.indexOf("humidity\":")-2);
             String humidity = result.substring(result.indexOf("humidity\":")+10,result.indexOf("temp_min\":")-2);
             tempView.setText(temperature);

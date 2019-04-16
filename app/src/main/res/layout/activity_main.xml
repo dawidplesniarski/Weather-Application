@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/typeCityButton"
+        android:id="@+id/typeCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -27,5 +27,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/typeCityButton" />
+        app:layout_constraintTop_toBottomOf="@+id/typeCity" />
 </android.support.constraint.ConstraintLayout>

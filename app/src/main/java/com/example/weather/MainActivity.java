@@ -1,25 +1,15 @@
 package com.example.weather;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
+import android.widget.EditText;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    ProgressDialog pd;
+    private String mCityName ="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +20,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickCheckWeather(View view)
     {
-        Intent intent = new Intent(this,Weather.class);
-        startActivity(intent);
+        EditText cityName = findViewById(R.id.typeCity);
+        mCityName = cityName.getText().toString();
+        Intent data = new Intent(this,Weather.class);
+        data.putExtra("cityName", mCityName);
+        startActivity(data);
+        data.removeExtra(mCityName);
+        mCityName="";
     }
 
-    //
+
     }
