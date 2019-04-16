@@ -9,7 +9,6 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String mCityName ="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,12 +20,11 @@ public class MainActivity extends AppCompatActivity {
     public void onClickCheckWeather(View view)
     {
         EditText cityName = findViewById(R.id.typeCity);
-        mCityName = cityName.getText().toString();
+        String mCityName = cityName.getText().toString();
         Intent data = new Intent(this,Weather.class);
         data.putExtra("cityName", mCityName);
         startActivity(data);
-        data.removeExtra(mCityName);
-        mCityName="";
+        //data.removeExtra(mCityName);
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.weather;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -25,7 +26,8 @@ public class Weather extends AppCompatActivity {
     TextView tempMinView;
     TextView tempMaxView;
     TextView humidityView;
-    private String mCityName = "";
+
+    @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,17 +39,17 @@ public class Weather extends AppCompatActivity {
         humidityView=findViewById(R.id.humidityTextView);
         pressureView=findViewById(R.id.pressureTextView);
         Intent intent = getIntent();
-        mCityName = intent.getStringExtra("cityName");
-        String WeatherAdress="http://api.openweathermap.org/data/2.5/weather?q="+mCityName+",pl&APPID=749561a315b14523a8f5f1ef95e45864&units=metric";
+        String mCityName = intent.getStringExtra("cityName");
+        String WeatherAdress="http://api.openweathermap.org/data/2.5/weather?q="+ mCityName +",pl&APPID=749561a315b14523a8f5f1ef95e45864&units=metric";
         TextView cityNameTextView = findViewById(R.id.cityNameTextView);
         cityNameTextView.setText(String.valueOf(mCityName));
         new JsonTask().execute(WeatherAdress);
-        mCityName ="";
     }
 
 
 
 
+    @SuppressLint("StaticFieldLeak")
     private class JsonTask extends AsyncTask<String, String, String> {
 
         protected void onPreExecute() {
@@ -75,11 +77,11 @@ public class Weather extends AppCompatActivity {
 
                 reader = new BufferedReader(new InputStreamReader(stream));
 
-                StringBuffer buffer = new StringBuffer();
+                StringBuilder buffer = new StringBuilder();
                 String line;
 
                 while ((line = reader.readLine()) != null) {
-                    buffer.append(line+"\n");
+                    buffer.append(line).append("\n");
                     Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
 
                 }
@@ -116,6 +118,7 @@ public class Weather extends AppCompatActivity {
             wUpdate(result);
         }
 
+        @SuppressLint("SetTextI18n")
         void wUpdate(String result)
         {
             String temperature = result.substring(result.indexOf("temp\":")+10,result.indexOf("pressure\":")-2);
@@ -124,11 +127,11 @@ public class Weather extends AppCompatActivity {
             //String cityName = result.substring(result.indexOf("name\":")+10,result.indexOf("cod\":")-3);
             String pressure = result.substring(result.indexOf("pressure\":")+10,result.indexOf("humidity\":")-2);
             String humidity = result.substring(result.indexOf("humidity\":")+10,result.indexOf("temp_min\":")-2);
-            tempView.setText(temperature);
-            humidityView.setText(humidity);
-            tempMaxView.setText(tempMax);
-            tempMinView.setText(tempMin);
-            pressureView.setText(pressure);
+            tempView.setText(temperature + "°C");
+            humidityView.setText(humidity + "%");
+            tempMaxView.setText(tempMax + "°C");
+            tempMinView.setText(tempMin + "°C");
+            pressureView.setText(pressure+ "hPa");
 
         }
     }
