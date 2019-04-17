@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import java.text.Normalizer;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
     {
         EditText cityName = findViewById(R.id.typeCity);
         String mCityName = cityName.getText().toString();
+        mCityName =
+                Normalizer
+                        .normalize(mCityName, Normalizer.Form.NFD)      // Zamiana wszystkich liter specjalnych typu ą ć ź itp.. na regularne litery
+                        .replaceAll("[^\\p{ASCII}]", "");
+
         Intent data = new Intent(this,Weather.class);
         data.putExtra("cityName", mCityName);
         startActivity(data);

@@ -26,6 +26,7 @@ public class Weather extends AppCompatActivity {
     TextView tempMinView;
     TextView tempMaxView;
     TextView humidityView;
+    String mCityName="";
 
     @SuppressLint("CutPasteId")
     @Override
@@ -39,7 +40,7 @@ public class Weather extends AppCompatActivity {
         humidityView=findViewById(R.id.humidityTextView);
         pressureView=findViewById(R.id.pressureTextView);
         Intent intent = getIntent();
-        String mCityName = intent.getStringExtra("cityName");
+        mCityName = intent.getStringExtra("cityName");
         String WeatherAdress="http://api.openweathermap.org/data/2.5/weather?q="+ mCityName +",pl&APPID=749561a315b14523a8f5f1ef95e45864&units=metric";
         TextView cityNameTextView = findViewById(R.id.cityNameTextView);
         cityNameTextView.setText(String.valueOf(mCityName));
@@ -121,9 +122,13 @@ public class Weather extends AppCompatActivity {
         @SuppressLint("SetTextI18n")
         void wUpdate(String result)
         {
+            String tempMax;
             String temperature = result.substring(result.indexOf("temp\":")+10,result.indexOf("pressure\":")-2);
             String tempMin = result.substring(result.indexOf("temp_min\":")+10,result.indexOf("temp_max\":")-2);
-            String tempMax = result.substring(result.indexOf("temp_max\":")+10,result.indexOf("visibility\":")-3);
+            if(mCityName.equalsIgnoreCase("Tarnow")){
+                tempMax = result.substring(result.indexOf("temp_max\":")+10,result.indexOf("wind\":")-3);
+            }else
+            tempMax = result.substring(result.indexOf("temp_max\":")+10,result.indexOf("visibility\":")-3);
             //String cityName = result.substring(result.indexOf("name\":")+10,result.indexOf("cod\":")-3);
             String pressure = result.substring(result.indexOf("pressure\":")+10,result.indexOf("humidity\":")-2);
             String humidity = result.substring(result.indexOf("humidity\":")+10,result.indexOf("temp_min\":")-2);
