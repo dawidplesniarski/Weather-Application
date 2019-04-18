@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -26,9 +27,9 @@ public class Weather extends AppCompatActivity {
     TextView tempMinView;
     TextView tempMaxView;
     TextView humidityView;
-    TextView mainWeatherInfo;
     String mCityName="";
     String MainWeather="";
+    ImageView imageView;
 
     @SuppressLint("CutPasteId")
     @Override
@@ -41,7 +42,7 @@ public class Weather extends AppCompatActivity {
         tempMaxView=findViewById(R.id.tempMaxTextView);
         humidityView=findViewById(R.id.humidityTextView);
         pressureView=findViewById(R.id.pressureTextView);
-        mainWeatherInfo=findViewById(R.id.mainWeatherInfoTextView);
+        imageView = findViewById(R.id.imageView);
         Intent intent = getIntent();
         mCityName = intent.getStringExtra("cityName");
         String WeatherAdress="http://api.openweathermap.org/data/2.5/weather?q="+ mCityName +",pl&APPID=749561a315b14523a8f5f1ef95e45864&units=metric";
@@ -127,25 +128,36 @@ public class Weather extends AppCompatActivity {
         {
             String tempMax;
             String tempMin = result.substring(result.indexOf("temp_min\":")+10,result.indexOf("temp_max\":")-2);
-            if(mCityName.equalsIgnoreCase("Tarnow")){
-                tempMax = result.substring(result.indexOf("temp_max\":")+10,result.indexOf("wind\":")-3);
+
+            if(result.contains("visibility")){
+                tempMax = result.substring(result.indexOf("temp_max\":")+10,result.indexOf("visibility\":")-3);
             }else
-            tempMax = result.substring(result.indexOf("temp_max\":")+10,result.indexOf("visibility\":")-3);
-            //String cityName = result.substring(result.indexOf("name\":")+10,result.indexOf("cod\":")-3);
+                tempMax = result.substring(result.indexOf("temp_max\":")+10,result.indexOf("wind\":")-3);
+
             String pressure = result.substring(result.indexOf("pressure\":")+10,result.indexOf("humidity\":")-2);
             String humidity = result.substring(result.indexOf("humidity\":")+10,result.indexOf("temp_min\":")-2);
-            String temperature = result.substring(result.indexOf("temp\":")+10,result.indexOf("pressure\":")-2);
-            MainWeather = result.substring(result.indexOf("description\":")+20,result.indexOf("icon\":")-3);
-            mainWeatherInfo.setText(MainWeather);
+            String temperature = result.substring(result.indexOf("temp\":")+6,result.indexOf("pressure\":")-2);
+            MainWeather = result.substring(result.indexOf("description\":")+14,result.indexOf("icon\":")-3);
+            TextView test = findViewById(R.id.TEST);
+            test.setText(MainWeather);
             tempView.setText(temperature + "°C");
             humidityView.setText(humidity + "%");
             tempMaxView.setText(tempMax + "°C");
             tempMinView.setText(tempMin + "°C");
             pressureView.setText(pressure+ "hPa");
+            if(MainWeather.contains("cloud") || MainWeather.contains("few clouds"))
+                imageView.setImageResource(R.drawable.cloudy_sky);
+
+            if(MainWeather.contains("clear") || MainWeather.contains("sky"))
+                imageView.setImageResource(R.drawable.clear_sky);
+
+            if(MainWeather.contains("rain"))
+                imageView.setImageResource(R.drawable.rain);
+
 
         }
     }
-
+//MainWeather.equals("clouds") ||  || MainWeather.equals("few clouds")
 
     }
 
