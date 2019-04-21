@@ -130,8 +130,7 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="48dp"
         android:contentDescription="@string/todo"
         app:layout_constraintStart_toEndOf="@+id/cityNameTextView"
         app:layout_constraintTop_toBottomOf="@+id/cityNameTextView"
@@ -144,6 +143,18 @@
         android:layout_marginStart="32dp"
         android:layout_marginBottom="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/TimeTextView"
+        android:layout_width="129dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="112dp"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

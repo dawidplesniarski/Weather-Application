@@ -7,11 +7,9 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +17,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Weather extends AppCompatActivity {
 
@@ -32,6 +33,7 @@ public class Weather extends AppCompatActivity {
     String mCityName="";
     String MainWeather="";
     ImageView imageView;
+    TextView timeView;
 
     @SuppressLint("CutPasteId")
     @Override
@@ -51,6 +53,11 @@ public class Weather extends AppCompatActivity {
         TextView cityNameTextView = findViewById(R.id.cityNameTextView);
         cityNameTextView.setText(String.valueOf(mCityName));
         new JsonTask().execute(WeatherAdress);
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        Date date = new Date();
+        timeView = findViewById(R.id.TimeTextView);
+        timeView.setText(dateFormat.format(date));
+
     }
 
     public void BackToMain(){
