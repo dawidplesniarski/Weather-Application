@@ -12,7 +12,6 @@ import java.text.Normalizer;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String mCityName="";
     EditText cityName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickCheckWeather(View view)
     {
         cityName = findViewById(R.id.typeCity);
-        mCityName = cityName.getText().toString();
+        String mCityName = cityName.getText().toString();
         mCityName =
                 Normalizer
                         .normalize(mCityName, Normalizer.Form.NFD)      // Zamiana wszystkich liter specjalnych typu ą ć ź itp.. na regularne litery

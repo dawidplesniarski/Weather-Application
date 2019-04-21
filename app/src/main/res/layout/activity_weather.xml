@@ -10,13 +10,12 @@
     <TextView
         android:id="@+id/cityNameTextView"
         android:layout_width="182dp"
-        android:layout_height="46dp"
+        android:layout_height="71dp"
         android:layout_marginStart="21dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="8dp"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/pressureTextView"
@@ -40,8 +39,8 @@
         android:id="@+id/tempMinTextView"
         android:layout_width="116dp"
         android:layout_height="42dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginBottom="212dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="224dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -49,8 +48,8 @@
         android:id="@+id/tempMaxTextView"
         android:layout_width="116dp"
         android:layout_height="42dp"
-        android:layout_marginStart="216dp"
-        android:layout_marginBottom="212dp"
+        android:layout_marginStart="228dp"
+        android:layout_marginBottom="220dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -58,32 +57,31 @@
         android:id="@+id/humidityText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:text="@string/humidity"
         android:textColor="#000066"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/humidityTextView"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="@+id/humidityTextView"
         app:layout_constraintTop_toBottomOf="@+id/pressureTextView" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginBottom="12dp"
+        android:layout_height="27dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/temp_min"
         android:textColor="#000066"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/tempMinTextView"
         app:layout_constraintEnd_toEndOf="@+id/tempMinTextView"
-        app:layout_constraintHorizontal_bias="0.405"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@+id/tempMinTextView" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="25dp"
         android:layout_marginBottom="12dp"
         android:text="@string/temp_max"
         android:textColor="#000066"

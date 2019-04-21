@@ -7,8 +7,10 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -49,6 +51,11 @@ public class Weather extends AppCompatActivity {
         TextView cityNameTextView = findViewById(R.id.cityNameTextView);
         cityNameTextView.setText(String.valueOf(mCityName));
         new JsonTask().execute(WeatherAdress);
+    }
+
+    public void BackToMain(){
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 
 
@@ -114,13 +121,24 @@ public class Weather extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            if (pd.isShowing()){
-                pd.dismiss();
+
+                super.onPostExecute(result);
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
+                //TextView textView = findViewById(R.id.textView);
+                //textView.setText(result);
+
+            if(result!=null)
+            {
+                wUpdate(result);
+            }else{
+                Toast.makeText(getApplicationContext(),"Podano błędne miasto!",Toast.LENGTH_LONG).show();
+                BackToMain();
             }
-            //TextView textView = findViewById(R.id.textView);
-            //textView.setText(result);
-            wUpdate(result);
+
+
+
         }
 
         @SuppressLint("SetTextI18n")
@@ -138,7 +156,9 @@ public class Weather extends AppCompatActivity {
             String humidity = result.substring(result.indexOf("humidity\":")+10,result.indexOf("temp_min\":")-2);
             String temperature = result.substring(result.indexOf("temp\":")+6,result.indexOf("pressure\":")-2);
             MainWeather = result.substring(result.indexOf("description\":")+14,result.indexOf("icon\":")-3);
+
             TextView test = findViewById(R.id.TEST);
+
             test.setText(MainWeather);
             tempView.setText(temperature + "°C");
             humidityView.setText(humidity + "%");
@@ -156,8 +176,8 @@ public class Weather extends AppCompatActivity {
 
 
         }
+
     }
-//MainWeather.equals("clouds") ||  || MainWeather.equals("few clouds")
 
     }
 
