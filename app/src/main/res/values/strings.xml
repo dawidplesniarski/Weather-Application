@@ -6,4 +6,5 @@
     <string name="humidity">Humidity</string>
     <string name="temp_max">Temp Max</string>
     <string name="todo">TODO</string>
+    <string name="refresh">Refresh</string>
 </resources>

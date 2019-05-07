@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,8 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Weather extends AppCompatActivity {
 
@@ -34,6 +37,9 @@ public class Weather extends AppCompatActivity {
     String MainWeather="";
     ImageView imageView;
     TextView timeView;
+    Timer timer = new Timer();
+    TimerTask timerTask;
+    private static boolean run = true;
 
     @SuppressLint("CutPasteId")
     @Override
@@ -57,6 +63,8 @@ public class Weather extends AppCompatActivity {
         Date date = new Date();
         timeView = findViewById(R.id.TimeTextView);
         timeView.setText(dateFormat.format(date));
+        AutoReload();
+        run = true;
 
     }
 
@@ -185,8 +193,35 @@ public class Weather extends AppCompatActivity {
         }
 
     }
+public void AutoReload()
+{
+     timerTask = new TimerTask() {
+        @Override
+        public void run() {
+            if(run) {
+           ReloadActivity();
+            } else {
+                timer.cancel();
+                timer.purge();
+            }
+        }
+    };
+    timer.schedule(timerTask, 10000, 10000);
+}
 
+    public void onClickReload(View view)
+    {
+        ReloadActivity();
+        run = false;
     }
+
+    public void ReloadActivity() {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
+}
 
 
 
