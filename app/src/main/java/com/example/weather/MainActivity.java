@@ -1,11 +1,15 @@
 package com.example.weather;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.Normalizer;
 
@@ -13,6 +17,9 @@ import java.text.Normalizer;
 public class MainActivity extends AppCompatActivity {
 
     EditText cityName;
+    boolean connected = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +40,35 @@ public class MainActivity extends AppCompatActivity {
 
         Intent data = new Intent(this,Weather.class);
         data.putExtra("cityName", mCityName);
-        startActivity(data);
-        saveData(mCityName);
+
+
+        ConnectivityManager manager =(ConnectivityManager) getApplicationContext()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
+        if (null != activeNetwork) {
+            if(activeNetwork.getType() == ConnectivityManager.TYPE_WIFI){
+                //we have WIFI
+                connected = true;
+            }
+            if(activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE){
+                //we have cellular data
+                connected = true;
+            }
+        } else{
+            //we have no connection :(
+            connected = false;
+        }
+
+
+        if(connected)
+        {
+            startActivity(data);
+            saveData(mCityName);
+        }
+        if(!connected)
+        {
+            Toast.makeText(getApplicationContext(),"Brak połączenia internetowego !",Toast.LENGTH_LONG).show();
+        }
         //data.removeExtra(mCityName);
     }
     private void saveData(String city)

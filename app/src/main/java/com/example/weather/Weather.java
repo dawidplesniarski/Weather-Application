@@ -63,8 +63,23 @@ public class Weather extends AppCompatActivity {
         Date date = new Date();
         timeView = findViewById(R.id.TimeTextView);
         timeView.setText(dateFormat.format(date));
-        AutoReload();
+
+
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                if(run) {
+                    ReloadActivity();
+                } else {
+                    timer.cancel();
+                    timer.purge();
+                }
+            }
+        };
+        timer.schedule(timerTask, 10000, 10000); // odświeża activity co 5 minut
+
         run = true;
+
 
     }
 
@@ -193,21 +208,7 @@ public class Weather extends AppCompatActivity {
         }
 
     }
-public void AutoReload()
-{
-     timerTask = new TimerTask() {
-        @Override
-        public void run() {
-            if(run) {
-           ReloadActivity();
-            } else {
-                timer.cancel();
-                timer.purge();
-            }
-        }
-    };
-    timer.schedule(timerTask, 10000, 10000);
-}
+
 
     public void onClickReload(View view)
     {
@@ -219,6 +220,8 @@ public void AutoReload()
         Intent intent = getIntent();
         finish();
         startActivity(intent);
+        timer.cancel();
+        timer.purge();
     }
 
 }
