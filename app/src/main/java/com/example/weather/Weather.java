@@ -2,13 +2,15 @@ package com.example.weather;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +42,7 @@ public class Weather extends AppCompatActivity {
     TextView timeView;
     Timer timer = new Timer();
     TimerTask timerTask;
+    boolean connected = false;
     private static boolean run = true;
 
     @SuppressLint("CutPasteId")
@@ -226,11 +229,41 @@ public class Weather extends AppCompatActivity {
     }
 
     public void ReloadActivity() {
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-        timer.cancel();
-        timer.purge();
+
+        ConnectivityManager manager =(ConnectivityManager) getApplicationContext()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
+        if (null != activeNetwork) {
+            if(activeNetwork.getType() == ConnectivityManager.TYPE_WIFI){
+                //połączenie WIFI
+                connected = true;
+            }
+            if(activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE){
+                //włączone dane komórkowe
+                connected = true;
+            }
+        } else{
+            //brak połączenia
+            connected = false;
+        }
+
+
+        if(connected)
+        {
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+            timer.cancel();
+            timer.purge();
+        }
+        if(!connected)
+        {
+            Toast.makeText(getApplicationContext(),"Brak połączenia internetowego !",Toast.LENGTH_LONG).show();
+            timer.cancel();
+            timer.purge();
+            run=false;
+        }
+
     }
 
 }
