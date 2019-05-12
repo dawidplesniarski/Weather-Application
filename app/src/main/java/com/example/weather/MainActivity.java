@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     {
         cityName = findViewById(R.id.typeCity);
         String mCityName = cityName.getText().toString();
+
+
         mCityName =
                 Normalizer
                         .normalize(mCityName, Normalizer.Form.NFD)      // Zamiana wszystkich liter specjalnych typu ą ć ź itp.. na regularne litery
@@ -42,20 +44,21 @@ public class MainActivity extends AppCompatActivity {
         data.putExtra("cityName", mCityName);
 
 
+
         ConnectivityManager manager =(ConnectivityManager) getApplicationContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
         if (null != activeNetwork) {
             if(activeNetwork.getType() == ConnectivityManager.TYPE_WIFI){
-                //we have WIFI
+                //połączenie WIFI
                 connected = true;
             }
             if(activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE){
-                //we have cellular data
+                //włączone dane komórkowe
                 connected = true;
             }
         } else{
-            //we have no connection :(
+            //brak połączenia
             connected = false;
         }
 
