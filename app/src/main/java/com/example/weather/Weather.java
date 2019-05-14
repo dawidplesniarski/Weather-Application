@@ -84,7 +84,6 @@ public class Weather extends AppCompatActivity {
 
         run = true;
 
-
     }
 
    public void onBackPressed(){
@@ -259,8 +258,6 @@ public class Weather extends AppCompatActivity {
         if(!connected)
         {
             Toast.makeText(getApplicationContext(),"Brak połączenia internetowego !",Toast.LENGTH_LONG).show();
-            timer.cancel();
-            timer.purge();
             run=false;
         }
 
