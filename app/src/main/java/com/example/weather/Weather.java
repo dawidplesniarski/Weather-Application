@@ -2,10 +2,7 @@ package com.example.weather;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,7 +39,7 @@ public class Weather extends AppCompatActivity {
     TextView timeView;
     Timer timer = new Timer();
     TimerTask timerTask;
-    boolean connected = false;
+   // boolean connected = false;
     private static boolean run = true;
 
     @SuppressLint("CutPasteId")
@@ -229,25 +226,9 @@ public class Weather extends AppCompatActivity {
 
     public void ReloadActivity() {
 
-        ConnectivityManager manager =(ConnectivityManager) getApplicationContext()
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
-        if (null != activeNetwork) {
-            if(activeNetwork.getType() == ConnectivityManager.TYPE_WIFI){
-                //połączenie WIFI
-                connected = true;
-            }
-            if(activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE){
-                //włączone dane komórkowe
-                connected = true;
-            }
-        } else{
-            //brak połączenia
-            connected = false;
-        }
 
 
-        if(connected)
+        if(CheckConnection.isConnected(this))
         {
             Intent intent = getIntent();
             finish();
@@ -255,7 +236,7 @@ public class Weather extends AppCompatActivity {
             timer.cancel();
             timer.purge();
         }
-        if(!connected)
+        if(!CheckConnection.isConnected(this))
         {
             Toast.makeText(getApplicationContext(),"Brak połączenia internetowego !",Toast.LENGTH_LONG).show();
             run=false;

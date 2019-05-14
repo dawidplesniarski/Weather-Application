@@ -1,10 +1,7 @@
 package com.example.weather;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +14,7 @@ import java.text.Normalizer;
 public class MainActivity extends AppCompatActivity {
 
     EditText cityName;
-    boolean connected = false;
+    //boolean connected = false;
 
 
     @Override
@@ -45,34 +42,17 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        ConnectivityManager manager =(ConnectivityManager) getApplicationContext()
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
-        if (null != activeNetwork) {
-            if(activeNetwork.getType() == ConnectivityManager.TYPE_WIFI){
-                //połączenie WIFI
-                connected = true;
-            }
-            if(activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE){
-                //włączone dane komórkowe
-                connected = true;
-            }
-        } else{
-            //brak połączenia
-            connected = false;
-        }
 
-
-        if(connected)
+        if(CheckConnection.isConnected(this))
         {
             startActivity(data);
             saveData(mCityName);
         }
-        if(!connected)
+        if(!CheckConnection.isConnected(this))
         {
             Toast.makeText(getApplicationContext(),"Brak połączenia internetowego !",Toast.LENGTH_LONG).show();
         }
-        //data.removeExtra(mCityName);
+
     }
     private void saveData(String city)
     {
@@ -89,5 +69,6 @@ public class MainActivity extends AppCompatActivity {
         cityName.setText(city);
     }
 
+}
 
-    }
+
