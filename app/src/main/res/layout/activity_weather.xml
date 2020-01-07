@@ -4,27 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#e6ffff"
     tools:context=".Weather">
 
     <TextView
         android:id="@+id/cityNameTextView"
-        android:layout_width="371dp"
-        android:layout_height="46dp"
+        android:layout_width="182dp"
+        android:layout_height="71dp"
         android:layout_marginStart="21dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="21dp"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
-
-    <TextView
-        android:id="@+id/tempTextView"
-        android:layout_width="116dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="8dp"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +22,7 @@
         android:layout_width="116dp"
         android:layout_height="42dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -50,8 +39,8 @@
         android:id="@+id/tempMinTextView"
         android:layout_width="116dp"
         android:layout_height="42dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginBottom="212dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="224dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -59,8 +48,8 @@
         android:id="@+id/tempMaxTextView"
         android:layout_width="116dp"
         android:layout_height="42dp"
-        android:layout_marginStart="216dp"
-        android:layout_marginBottom="212dp"
+        android:layout_marginStart="228dp"
+        android:layout_marginBottom="220dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -68,30 +57,35 @@
         android:id="@+id/humidityText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Humidity"
+        android:layout_marginTop="20dp"
+        android:text="@string/humidity"
+        android:textColor="#000066"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/humidityTextView"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="@+id/humidityTextView"
         app:layout_constraintTop_toBottomOf="@+id/pressureTextView" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginBottom="12dp"
-        android:text="Temp Min"
+        android:layout_height="27dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/temp_min"
+        android:textColor="#000066"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/tempMinTextView"
         app:layout_constraintEnd_toEndOf="@+id/tempMinTextView"
-        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@+id/tempMinTextView" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="25dp"
         android:layout_marginBottom="12dp"
-        android:text="Temp Max"
+        android:text="@string/temp_max"
+        android:textColor="#000066"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/tempMaxTextView"
         app:layout_constraintEnd_toEndOf="@+id/tempMaxTextView"
         app:layout_constraintHorizontal_bias="0.469"
@@ -102,8 +96,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Pressure"
+        android:text="@string/pressure"
+        android:textColor="#000066"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/pressureTextView"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="@+id/pressureTextView"
         app:layout_constraintTop_toBottomOf="@+id/tempTextView" />
 
@@ -111,10 +108,67 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Temp"
-        app:layout_constraintBottom_toTopOf="@+id/tempTextView"
-        app:layout_constraintEnd_toEndOf="@+id/tempTextView"
-        app:layout_constraintStart_toStartOf="@+id/tempTextView" />
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/temp"
+        android:textColor="#000066"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/cityNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/cityNameTextView" />
+
+    <TextView
+        android:id="@+id/tempTextView"
+        android:layout_width="116dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView8"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintStart_toEndOf="@+id/cityNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/cityNameTextView"
+        app:srcCompat="@android:color/background_light" />
+
+    <TextView
+        android:id="@+id/TEST"
+        android:layout_width="103dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/TimeTextView"
+        android:layout_width="129dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="112dp"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="onClickReload"
+        android:text="@string/refresh"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
